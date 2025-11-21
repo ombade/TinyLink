@@ -1,0 +1,62 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Link {
+  id            String   @id @default(cuid())
+  shortCode     String   @unique @db.VarChar(8)
+  longUrl       String   @db.Text
+  
+  // Analytics
+  clicks        Int      @default(0)
+  lastClickedAt DateTime?
+  
+  // GenAI Features
+  category      String?  @db.VarChar(50)
+  aiSuggested   Boolean  @default(false)
+  securityScore Int?     // 0-100, AI-generated
+  
+  // Metadata
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  expiresAt     DateTime?
+  
+  // Relations
+  clicks_detail Click[]
+  
+  @@index([shortCode])
+  @@index([createdAt])
+  @@index([clicks])
+}
+
+model Click {
+  id        String   @id @default(cuid())
+  linkId    String
+  link      Link     @relation(fields: [linkId], references: [id], onDelete: Cascade)
+  
+  // Analytics data
+  clickedAt DateTime @default(now())
+  userAgent String?  @db.Text
+  referer   String?  @db.Text
+  ipHash    String?  @db.VarChar(64) // Hashed for privacy
+  
+  @@index([linkId])
+  @@index([clickedAt])
+}
+
+model AIInsight {
+  id        String   @id @default(cuid())
+  linkId    String
+  type      String   @db.VarChar(50) // "category", "security", "suggestion"
+  content   String   @db.Text
+  confidence Float   // 0.0 - 1.0
+  createdAt DateTime @default(now())
+  
+  @@index([linkId])
+}

@@ -1,65 +1,105 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import CreateLinkForm from '@/components/CreateLinkForm';
+import LinksTable from '@/components/LinksTable';
 
 export default function Home() {
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const handleLinkCreated = () => {
+    setRefreshTrigger((prev) => prev + 1);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Two Column Layout - Hero Left, Form Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-center">
+          {/* Left Side - Hero Section */}
+          <div className="text-center lg:text-left animate-fade-in">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-primary-600 via-accent-600 to-primary-600 bg-clip-text text-transparent break-words">
+              Shorten URLs with AI Magic ✨
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6">
+              Create memorable short links with AI-powered suggestions, automatic categorization, and security scanning.
+            </p>
+
+            {/* Key Benefits */}
+            <div className="space-y-3 text-left">
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-primary-600 dark:text-primary-400 text-sm">✓</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">AI-Powered Suggestions</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Get smart, memorable short code recommendations</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-accent-100 dark:bg-accent-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-accent-600 dark:text-accent-400 text-sm">✓</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Automatic Categorization</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Links are intelligently organized by content type</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-green-600 dark:text-green-400 text-sm">✓</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Security Scanning</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Every URL is checked for safety and threats</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Create Link Form */}
+          <div className="animate-slide-up">
+            <CreateLinkForm onSuccess={handleLinkCreated} />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Links Table */}
+        <div className="animate-slide-up mb-12" style={{ animationDelay: '0.2s' }}>
+          <LinksTable />
         </div>
-      </main>
-    </div>
+
+        {/* Features Grid - Moved to Bottom (Above Footer) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
+          <div className="card text-center hover:shadow-lg transition-shadow">
+            <div className="text-3xl mb-2">🤖</div>
+            <h3 className="font-semibold mb-1">AI Suggestions</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Smart code recommendations
+            </p>
+          </div>
+          <div className="card text-center hover:shadow-lg transition-shadow">
+            <div className="text-3xl mb-2">🏷️</div>
+            <h3 className="font-semibold mb-1">Auto Category</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Intelligent classification
+            </p>
+          </div>
+          <div className="card text-center hover:shadow-lg transition-shadow">
+            <div className="text-3xl mb-2">🛡️</div>
+            <h3 className="font-semibold mb-1">Security Scan</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Malicious URL detection
+            </p>
+          </div>
+          <div className="card text-center hover:shadow-lg transition-shadow">
+            <div className="text-3xl mb-2">📊</div>
+            <h3 className="font-semibold mb-1">Analytics</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Click tracking & insights
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
