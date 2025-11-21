@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔗 TinyLink - AI-Powered URL Shortener
 
-## Getting Started
+A modern, production-grade URL shortener built with Next.js 14, featuring AI-powered smart suggestions, automatic categorization, and security scanning.
 
-First, run the development server:
+## ✨ Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Core Features
+- ✅ **URL Shortening** - Create short links with auto-generated or custom codes
+- ✅ **Click Tracking** - Real-time analytics and click counting
+- ✅ **Link Management** - View, search, filter, and delete links
+- ✅ **Stats Dashboard** - Detailed analytics for each link
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🤖 AI-Powered Features
+- **Smart Code Suggestions** - AI analyzes URLs to suggest memorable short codes
+- **Auto Categorization** - Automatically categorize links (News, Tech, E-commerce, etc.)
+- **Security Scanning** - Detect phishing and malicious URLs before shortening
+- **Analytics Insights** - Natural language insights from click data
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🎨 Modern UI/UX
+- Responsive design (mobile-first)
+- Dark mode support
+- Glassmorphism effects
+- Smooth animations
+- Loading and error states
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Tech Stack
 
-## Learn More
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: PostgreSQL (Neon)
+- **ORM**: Prisma
+- **AI**: Google Gemini API
+- **Deployment**: Vercel
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔌 API Endpoints
 
-## Deploy on Vercel
+| Method | Path | Description | Status Codes |
+|--------|------|-------------|--------------|
+| `POST` | `/api/links` | Create short link | `201`, `409` |
+| `GET` | `/api/links` | List all links | `200` |
+| `GET` | `/api/links/:code` | Get link stats | `200`, `404` |
+| `DELETE` | `/api/links/:code` | Delete link | `204`, `404` |
+| `GET` | `/healthz` | Health check | `200` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+# TinyLink
